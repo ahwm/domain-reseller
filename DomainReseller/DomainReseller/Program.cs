@@ -2,6 +2,7 @@ using DomainReseller.Client.Pages;
 using DomainReseller.Components;
 using DomainReseller.Components.Account;
 using DomainReseller.Data;
+using DomainReseller.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace DomainReseller
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+            builder.Services.AddScoped<DomainService>();
 
             var app = builder.Build();
 
