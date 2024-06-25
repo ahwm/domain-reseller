@@ -34,7 +34,7 @@ namespace DomainReseller.Services
                 }
                 catch (GodaddyException ex)
                 {
-                    throw new Exception(ex.StatusCode + ": " +ex.ErrorResponse.Message);
+                    throw new Exception(ex.StatusCode + ": " + ex.ErrorResponse.Message);
                     //Godaddy Error Message from the Godaddy API
                     //Console.WriteLine(ex.ErrorResponse.Message);
                     //Error Code
@@ -52,6 +52,28 @@ namespace DomainReseller.Services
             }
 
             return (status, suggestions);
+        }
+
+        public async Task Register(string domain)
+        {
+            if (_settings.Provider == DomainProvider.GoDaddy)
+            {
+                var client = new GodaddyWrapper.Client(_settings.ApiKey, _settings.GoDaddySecretKey, _settings.Sandbox ? "https://api.ote-godaddy.com/api/v1/" : "https://api.godaddy.com/api/v1/");
+                var result = await client.PurchaseDomain(new DomainPurchase{ Domain = domain,  Period = 1 });
+                if (result != null)
+                {
+
+                }
+            }
+            else
+            {
+                var client = new OpenSrsClient(_settings.OpenSRSUserName, _settings.ApiKey, _settings.Sandbox);
+                var result = await client.RegisterAsync(new RegisterRequest { Domain = domain, Period = 1 });
+                if (result != null)
+                {
+
+                }
+            }
         }
     }
 }
