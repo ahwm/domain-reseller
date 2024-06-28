@@ -28,17 +28,14 @@ namespace DomainReseller.Services
 
                     var suggestResponse = await client.RetrieveSuggestDomain(new DomainSuggest
                     {
-                        Query = domain
+                        Query = domain,
+                        Tlds = []
                     });
                     suggestions = [..suggestResponse.Select(x => x.Domain)];
                 }
                 catch (GodaddyException ex)
                 {
-                    throw new Exception(ex.StatusCode + ": " + ex.ErrorResponse.Message);
-                    //Godaddy Error Message from the Godaddy API
-                    //Console.WriteLine(ex.ErrorResponse.Message);
-                    //Error Code
-                    //Console.WriteLine(ex.StatusCode);
+                    throw new Exception(ex.StatusCode + ": " + ex.ErrorResponse.Message, ex);
                 }
             }
             else if (_settings.Provider == DomainProvider.OpenSRS)
@@ -47,7 +44,7 @@ namespace DomainReseller.Services
                 var result = await client.LookupAsync(new LookupRequest(domain));
                 status = result.Status == DomainStatus.Available;
 
-                var suggestResponse = await client.NameSuggestAsync(new NameSuggestRequest { Query = domain });
+                var suggestResponse = await client.NameSuggestAsync(new NameSuggestRequest { Query = domain, Tlds = [] });
                 suggestions = [..suggestResponse.Suggestions.Where(x => x.Status == "available").Select(x => x.Domain)];
             }
 
@@ -59,7 +56,7 @@ namespace DomainReseller.Services
             if (_settings.Provider == DomainProvider.GoDaddy)
             {
                 var client = new GodaddyWrapper.Client(_settings.ApiKey, _settings.GoDaddySecretKey, _settings.Sandbox ? "https://api.ote-godaddy.com/api/v1/" : "https://api.godaddy.com/api/v1/");
-                var result = await client.PurchaseDomain(new DomainPurchase{ Domain = domain,  Period = 1 });
+                var result = await client.PurchaseDomain(new DomainPurchase { Domain = domain,  Period = 1 });
                 if (result != null)
                 {
 
