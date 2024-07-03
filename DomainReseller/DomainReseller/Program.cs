@@ -35,7 +35,9 @@ namespace DomainReseller
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+#if DEBUG
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+#endif
 
             builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -46,6 +48,8 @@ namespace DomainReseller
             builder.Services.AddScoped<DomainService>();
 
             var app = builder.Build();
+
+            UpdateDatabase(app);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -74,6 +78,17 @@ namespace DomainReseller
             app.MapAdditionalIdentityEndpoints();
 
             app.Run();
+        }
+
+        private static void UpdateDatabase(WebApplication app)
+        {
+            using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>()!)
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }
