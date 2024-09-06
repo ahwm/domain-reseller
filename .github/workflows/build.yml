@@ -18,4 +18,6 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Build
-        run: dotnet build .\DomainReseller
+        run: |
+            dotnet nuget add source --username ahwm --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/ahwm/index.json"
+            dotnet build .\DomainReseller
