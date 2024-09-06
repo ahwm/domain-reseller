@@ -7,13 +7,19 @@
     <UserSecretsId>aspnet-DomainReseller-dc29eff5-ecfa-4b3a-b5b0-1fe806250fae</UserSecretsId>
   </PropertyGroup>
 
+  <!-- transitive dependencies with vulnerabilities -->
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.11.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+    <PackageReference Include="Azure.Identity" Version="1.12.0" />
+    <PackageReference Include="System.Formats.Asn1" Version="8.0.1" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -22,7 +28,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DomainReseller.Client\DomainReseller.Client.csproj" />
     <PackageReference Include="GodaddyWrapper" Version="2.0.0" />
-    <PackageReference Include="OpenSrs" Version="0.9.0" />
+    <PackageReference Include="OpenSRS.NET" Version="0.0.1-beta5" />
+    <PackageReference Include="Stripe.net" Version="45.11.0" />
+    <PackageReference Include="Square" Version="38.0.0" />
   </ItemGroup>
 
 </Project>

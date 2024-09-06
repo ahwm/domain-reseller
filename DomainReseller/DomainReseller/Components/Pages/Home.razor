@@ -1,7 +1,21 @@
 ﻿@page "/"
+@using DomainReseller.Services
+@inject IDomainService domainService
+@rendermode InteractiveServer
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        await domainService.Register("test.com");
+    }
+}

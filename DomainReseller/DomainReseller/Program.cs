@@ -2,15 +2,18 @@ using DomainReseller.Client.Pages;
 using DomainReseller.Components;
 using DomainReseller.Components.Account;
 using DomainReseller.Data;
+using DomainReseller.Models;
 using DomainReseller.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OpenSRS.NET;
 
 namespace DomainReseller
 {
     public class Program
     {
+        //internal delegate IDomainService ServiceResolver(string serviceType);
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -45,10 +48,18 @@ namespace DomainReseller
                 .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-            builder.Services.AddScoped<DomainService>();
+
+            var configuration = builder.Configuration.GetSection("DomainReseller")?.Get<DomainResellerSettings>() ?? new DomainResellerSettings();
+            if (configuration.Provider == DomainProvider.GoDaddy)
+                builder.Services.AddScoped<IDomainService, GoDaddyDomainService>();
+            else if (configuration.Provider == DomainProvider.OpenSRS)
+                builder.Services.AddScoped<IDomainService, OpenSRSDomainService>();
+
+            builder.Services.UseOpenSRS();
 
             var app = builder.Build();
 
+            // handle database migrations automatically on startup
             UpdateDatabase(app);
 
             // Configure the HTTP request pipeline.
