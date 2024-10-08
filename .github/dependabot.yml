@@ -6,7 +6,13 @@
 version: 2
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/DomainReseller/DomainReseller" # Location of package manifests
-    directory: "/DomainReseller/DomainReseller.Client" # Location of package manifests
+    directories:
+      - "/DomainReseller/DomainReseller" # Location of package manifests
+      - "/DomainReseller/DomainReseller.Client" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "weekly"
