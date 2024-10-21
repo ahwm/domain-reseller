@@ -28,7 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DomainReseller.Client\DomainReseller.Client.csproj" />
     <PackageReference Include="GodaddyWrapper" Version="2.0.0" />
-    <PackageReference Include="OpenSRS.NET" Version="0.0.1-beta5" />
+    <PackageReference Include="OpenSRS.NET" Version="0.0.1-beta8" />
     <PackageReference Include="Stripe.net" Version="45.11.0" />
     <PackageReference Include="Square" Version="38.0.0" />
   </ItemGroup>

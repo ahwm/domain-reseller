@@ -16,6 +16,6 @@ Welcome to your new app.
 
     private async Task IncrementCount()
     {
-        await domainService.Register("test.com");
+        var result = await domainService.CheckAvailable("thescripters.com");
     }
 }

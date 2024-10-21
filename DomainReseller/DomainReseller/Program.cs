@@ -53,9 +53,10 @@ namespace DomainReseller
             if (configuration.Provider == DomainProvider.GoDaddy)
                 builder.Services.AddScoped<IDomainService, GoDaddyDomainService>();
             else if (configuration.Provider == DomainProvider.OpenSRS)
-                builder.Services.AddScoped<IDomainService, OpenSRSDomainService>();
-
-            builder.Services.UseOpenSRS();
+            {
+                builder.Services.AddOpenSRS(configuration.OpenSRSApiKey, configuration.OpenSRSUserName, configuration.Sandbox);
+                builder.Services.AddTransient<IDomainService, OpenSRSDomainService>();
+            }
 
             var app = builder.Build();
 

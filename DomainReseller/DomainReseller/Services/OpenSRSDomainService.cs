@@ -14,11 +14,10 @@ namespace DomainReseller.Services
             bool status = true;
             List<string> suggestions = [];
 
-            openSRS.Configure(_settings.OpenSRSApiKey, _settings.OpenSRSUserName, _settings.Sandbox);
             var result = await openSRS.LookupAsync(new LookupRequest(domain));
             status = result.Status == DomainStatus.Available;
 
-            var suggestResponse = await openSRS.NameSuggestAsync(new NameSuggestRequest { Query = domain, Tlds = [] });
+            var suggestResponse = await openSRS.NameSuggestAsync(new NameSuggestRequest { Query = domain, Tlds = _settings.DefaultTlds.Split(',') });
             suggestions = [.. suggestResponse.Suggestions.Where(x => x.Status == "available").Select(x => x.Domain)];
 
             return (status, suggestions);
@@ -26,7 +25,6 @@ namespace DomainReseller.Services
 
         public async Task Register(string domain)
         {
-            openSRS.Configure(_settings.OpenSRSApiKey, _settings.OpenSRSUserName, _settings.Sandbox);
             var result = await openSRS.RegisterAsync(new RegisterRequest { Domain = domain, Period = 1 });
             if (result != null)
             {
