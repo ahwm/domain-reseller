@@ -4,6 +4,7 @@ using DomainReseller.Components.Account;
 using DomainReseller.Data;
 using DomainReseller.Models;
 using DomainReseller.Services;
+using GodaddyWrapper;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +52,10 @@ namespace DomainReseller
 
             var configuration = builder.Configuration.GetSection("DomainReseller")?.Get<DomainResellerSettings>() ?? new DomainResellerSettings();
             if (configuration.Provider == DomainProvider.GoDaddy)
+            {
+                builder.Services.AddGoDaddy(configuration.GoDaddyAccessKey, configuration.GoDaddySecretKey, configuration.Sandbox);
                 builder.Services.AddScoped<IDomainService, GoDaddyDomainService>();
+            }
             else if (configuration.Provider == DomainProvider.OpenSRS)
             {
                 builder.Services.AddOpenSRS(configuration.OpenSRSApiKey, configuration.OpenSRSUserName, configuration.Sandbox);
