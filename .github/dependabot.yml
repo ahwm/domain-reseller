@@ -4,11 +4,17 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
+registries:
+  github:
+    type: nuget
+    url: https://nuget.pkg.github.com/ahwm/index.json
+    token: ${{ secrets.GITHUB_TOKEN }}
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
     directories:
       - "/DomainReseller/DomainReseller" # Location of package manifests
       - "/DomainReseller/DomainReseller.Client" # Location of package manifests
+    registries: "*"
     schedule:
       interval: "weekly"
 
