@@ -9,6 +9,9 @@ registries:
     type: nuget-feed
     url: https://nuget.pkg.github.com/ahwm/index.json
     token: ${{ secrets.GHPKG_NUGET }}
+  nuget:
+    type: nuget-feed
+    url: https://api.nuget.org/v3/index.json
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
     directories:
