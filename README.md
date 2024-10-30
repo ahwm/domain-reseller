@@ -6,4 +6,7 @@ This project is designed to allow a small business to spin up their own domain r
 
 Currently designed to work with GoDaddy and OpenSRS.
 
-GoDaddy requires a [Good as Gold account](https://www.godaddy.com/help/what-is-good-as-gold-3359) to process purchases via the API.
+GoDaddy requires:
+
+- [API Reseller Plan](https://www.godaddy.com/help/what-is-an-api-reseller-plan-5939)
+- [Good as Gold account](https://www.godaddy.com/help/what-is-good-as-gold-3359)
