@@ -30,7 +30,7 @@
     <PackageReference Include="GodaddyWrapper" Version="3.0.0" />
     <PackageReference Include="OpenSRS.NET" Version="0.0.1-beta9" />
     <PackageReference Include="Stripe.net" Version="47.0.0" />
-    <PackageReference Include="Square" Version="38.2.0" />
+    <PackageReference Include="Square" Version="39.0.0" />
   </ItemGroup>
 
 </Project>
