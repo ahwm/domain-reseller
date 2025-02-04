@@ -23,13 +23,21 @@ namespace DomainReseller.Services
             return (status, suggestions);
         }
 
-        public async Task Register(string domain)
+        public async Task<(bool status, string message)> Register(string domain)
         {
-            var result = await openSRS.RegisterAsync(new RegisterRequest { Domain = domain, Period = 1 });
+            var result = await openSRS.RegisterAsync(new RegisterRequest { 
+                Domain = domain, 
+                Period = 1, 
+                CustomNameservers = false, 
+                RegistrationType = RegistrationType.New, 
+                LockDomain = true 
+            });
             if (result != null)
             {
-
+                return (true, "");
             }
+
+            return (false, "There was a problem registering the specified domain");
         }
     }
 }

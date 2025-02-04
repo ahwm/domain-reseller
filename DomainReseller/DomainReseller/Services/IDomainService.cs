@@ -10,6 +10,6 @@ namespace DomainReseller.Services
     {
         public Task<(bool status, List<string> suggestions)> CheckAvailable(string domain);
 
-        public Task Register(string domain);
+        public Task<(bool status, string message)> Register(string domain);
     }
 }
