@@ -9,7 +9,7 @@
 
   <!-- transitive dependencies with vulnerabilities -->
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.17.0" />
+    <PackageReference Include="Azure.Identity" Version="1.17.1" />
     <PackageReference Include="System.Formats.Asn1" Version="9.0.10" />
     <PackageReference Include="System.Text.Json" Version="9.0.10" />
   </ItemGroup>
