@@ -8,7 +8,7 @@ namespace DomainReseller.Data
     [PrimaryKey(nameof(Id))]
     public class OpenSRSPricing
     {
-        [Key, Required]
+        [Required]
         public int Id { get; set; }
 
         [Required]
