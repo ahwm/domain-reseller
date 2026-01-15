@@ -12,6 +12,7 @@ namespace DomainReseller.Data
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string TLD { get; set; } = "";
 
         public decimal RegistrationPrice { get; set; }
