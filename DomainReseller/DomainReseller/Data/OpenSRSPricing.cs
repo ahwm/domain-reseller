@@ -15,10 +15,13 @@ namespace DomainReseller.Data
         [MaxLength(50)]
         public string TLD { get; set; } = "";
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal RegistrationPrice { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal TransferPrice { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal RenewalPrice { get; set; }
     }
 }
