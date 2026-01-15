@@ -7,7 +7,7 @@ namespace DomainReseller.Data
     internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
         public DbSet<CustomerDomain> CustomerDomains { get; set; }
-        public DbSet<OpenSRSPricing> OpenSRSPricings { get; set; }
+        public DbSet<OpenSRSPricing> OpenSRSPricing { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
