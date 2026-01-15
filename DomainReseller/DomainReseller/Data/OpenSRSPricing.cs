@@ -14,13 +14,10 @@ namespace DomainReseller.Data
         [Required]
         public string TLD { get; set; } = "";
 
-        [Required]
         public decimal RegistrationPrice { get; set; }
 
-        [Required]
         public decimal TransferPrice { get; set; }
 
-        [Required]
         public decimal RenewalPrice { get; set; }
     }
 }
